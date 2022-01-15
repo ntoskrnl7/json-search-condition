@@ -4,12 +4,18 @@
 
 - [json-search-condition](#json-search-condition)
   - [Contents](#contents)
+  - [Dependencies](#dependencies)
   - [Usage](#usage)
     - [CMake](#cmake)
       - [CMakeLists.txt](#cmakeliststxt)
     - [Examples](#examples)
       - [Scheme](#scheme)
       - [SQLite](#sqlite)
+
+## Dependencies
+
+- [ext](https://github.com/ntoskrnl7/ext)
+- [nlohmann::json](https://github.com/nlohmann/json)
 
 ## Usage
 
@@ -28,7 +34,7 @@ add_executable(tests tests.cpp)
 
 # add dependencies
 include(cmake/CPM.cmake)
-CPMAddPackage("gh:ntoskrnl7/jsc@0.1.0")
+CPMAddPackage("gh:ntoskrnl7/json-search-condition@0.1.0")
 
 # link dependencies
 target_link_libraries(tests jsc)
@@ -80,17 +86,17 @@ target_link_libraries(tests jsc)
             "operator": "in", // contains, ctns
             "value": "dea"
         },
-        "sample5": // birthday '1988-05-13' ~  1988-12-31'
+        "sample5": // age 20 ~ 30
         {
-            "field": "birthday",
+            "field": "age",
             "operator": "range", // BEETWEN
-            "begin": "1988-05-13",
-            "end": "1988-12-31"
+            "begin": 20,
+            "end": 30
         },
         "sample3": // name in ("seoul", "daejeon", "daegu", "busan")
         {
             "field": "city",
-            "operator": "in", // contains, ctns, range
+            "operator": "range", // IN, contains, ctns
             "value": [
                 "seoul",
                 "daejeon",
