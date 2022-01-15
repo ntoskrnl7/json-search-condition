@@ -204,8 +204,10 @@ inline std::string to_string(const nlohmann::json &condition) {
             //
             if ((code == sop_range || code == sop_between) &&
                 (condition.contains("begin") && condition.contains("end") &&
-                 condition["begin"].is_number() &&
-                 condition["end"].is_number())) {
+                 (condition["begin"].is_string() ||
+                  condition["begin"].is_number()) &&
+                 (condition["end"].is_string() ||
+                  condition["end"].is_number()))) {
               std::string begin, end;
               if (to_str(condition["begin"], begin) &&
                   to_str(condition["end"], end)) {
